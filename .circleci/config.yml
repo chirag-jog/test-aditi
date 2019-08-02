@@ -1,10 +1,5 @@
 version: 2.1
 
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
 workflows:
   unit_tests:
     jobs:
@@ -14,6 +9,11 @@ workflows:
     jobs:
       - job2
       - job3
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
 
 jobs:
   job1:
@@ -33,10 +33,6 @@ jobs:
           command: echo "2nd job"
 
   job3:
-    #parameters:
-    #  run_integration_tests:
-    #    type: boolean
-    #    default: false
     docker:
       - image: google/cloud-sdk
     steps:
