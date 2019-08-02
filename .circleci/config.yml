@@ -11,7 +11,6 @@ workflows:
       - job1
       
   integration_tests:
-  - when: << pipeline.parameters.run_integration_tests >>
     jobs:
       - job2
       - job3
@@ -32,6 +31,7 @@ jobs:
       - run:
           name: 2nd job for prospective merge
           command: echo "2nd job"
+          when: << pipeline.parameters.run_integration_tests >>
 
   job3:
     docker:
@@ -40,3 +40,4 @@ jobs:
       - run:
           name: 3rd job for intergration tests
           command: echo "3rd job"
+          when: << pipeline.parameters.run_integration_tests >>
