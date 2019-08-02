@@ -12,7 +12,7 @@ workflows:
       
   integration_tests:
   - when:
-      condition: << parameters.run_integration_tests >>
+      condition: true
     jobs:
       - job2
       - job3
