@@ -9,7 +9,7 @@ workflows:
   integration_tests:
     jobs:
       - job2
-      - job3
+      - build
 
 parameters:
   run_integration_tests:
@@ -33,7 +33,7 @@ jobs:
           name: 2nd job for prospective merge
           command: echo "2nd job"
 
-  job3:
+  build:
     docker:
       - image: google/cloud-sdk
     steps:
