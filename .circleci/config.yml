@@ -1,9 +1,9 @@
 version: 2.1
 
-#parameters:
-#  run_integration_tests:
-#    type: boolean
-#    default: false
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
 
 workflows:
   unit_tests:
@@ -11,8 +11,6 @@ workflows:
       - job1
       
   integration_tests:
-    #when:
-    #  condition: << pipeline.parameters.run_integration_tests >>
     jobs:
       - job2
       - job3
@@ -35,15 +33,15 @@ jobs:
           command: echo "2nd job"
 
   job3:
-    parameters:
-      run_integration_tests:
-        type: boolean
-        default: false
+    #parameters:
+    #  run_integration_tests:
+    #    type: boolean
+    #    default: false
     docker:
       - image: google/cloud-sdk
     steps:
       - when:
           condition:
-            equals: ['<< parameters.run_integration_tests >>', true]
+            equals: ['<< pipeline.parameters.run_integration_tests >>', true]
           steps:
-            - run: echo << parameters.run_integration_tests >>
+            - run: echo << pipeline.parameters.run_integration_tests >>
