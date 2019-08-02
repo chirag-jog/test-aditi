@@ -9,9 +9,6 @@ workflows:
           type: approval
           requires:
             - job2
-      - deploy_to_production:
-          requires:
-            - hold
 
 jobs:
   job1:
