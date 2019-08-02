@@ -1,18 +1,16 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/mern-starter
-    # The primary container is an instance of the first image listed. The job's commands run in this container.
-    docker:
-      - image: hello-world
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
           name: 1st job
           command: echo "1st job"
   test:
-    docker:
-      - image: hello-world
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
