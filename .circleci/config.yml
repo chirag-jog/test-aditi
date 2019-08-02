@@ -12,7 +12,7 @@ workflows:
       
   integration_tests:
   - when:
-      condition: true
+      condition: "$run_integration_tests == true"
     jobs:
       - job2
       - job3
