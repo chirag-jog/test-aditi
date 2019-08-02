@@ -1,14 +1,14 @@
 version: 2.1
 
-#workflows:
-#  unit_tests:
-#    jobs:
-#      - job1
+workflows:
+  unit_tests:
+    jobs:
+      - job1
       
-#  integration_tests:
-#    jobs:
-#      - job2
-#      - job3
+  integration_tests:
+    jobs:
+      - job2
+      - job3
 
 parameters:
   run_integration_tests:
