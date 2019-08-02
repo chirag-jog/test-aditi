@@ -1,4 +1,10 @@
 version: 2
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+
 jobs:
   build:
     machine:
@@ -16,13 +22,3 @@ jobs:
       - run:
           name: 2nd job
           command: echo "2nd job"
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          type: approval
-          requires:
-            - build
