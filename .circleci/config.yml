@@ -1,15 +1,13 @@
 version: 2.1
 
 workflows:
-  version: 2
   unit_tests:
     jobs:
       - job1
-      
   integration_tests:
     jobs:
       - job2
-      - build
+      - job3
 
 parameters:
   run_integration_tests:
@@ -24,7 +22,6 @@ jobs:
       - run:
           name: 1st job for unit tests
           command: echo "1st job"
-  
   job2:
     docker:
       - image: google/cloud-sdk
@@ -32,8 +29,7 @@ jobs:
       - run:
           name: 2nd job for prospective merge
           command: echo "2nd job"
-
-  build:
+  job3:
     docker:
       - image: google/cloud-sdk
     steps:
