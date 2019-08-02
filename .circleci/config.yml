@@ -7,16 +7,16 @@ workflows:
 
 jobs:
   build:
-    machine:
-      image: ubuntu-1604:201903-01
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout
       - run:
           name: 1st job
           command: echo "1st job"
   test:
-    machine:
-      image: ubuntu-1604:201903-01
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout
       - run:
