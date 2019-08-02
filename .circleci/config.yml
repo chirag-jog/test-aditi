@@ -12,8 +12,8 @@ workflows:
       
   integration_tests:
   - when:
-      condition:
-        equals: ['<< pipeline.parameters.run_integration_tests >>', true]
+      condition: "<< pipeline.parameters.run_integration_tests >> == true"
+        #equals: ['<< pipeline.parameters.run_integration_tests >>', true]
     jobs:
       - job2
       - job3
