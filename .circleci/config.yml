@@ -1,24 +1,24 @@
-version: 2
+version: 2.1
+
 workflows:
   build_and_test:
     jobs:
-      - build
-      - test
+      - job1
+      - job2
 
 jobs:
-  build:
+  job1:
     docker:
       - image: google/cloud-sdk
     steps:
-      - checkout
       - run:
           name: 1st job
           command: echo "1st job"
-  test:
+  
+  job2:
     docker:
       - image: google/cloud-sdk
     steps:
-      - checkout
       - run:
           name: 2nd job
           command: echo "2nd job"
