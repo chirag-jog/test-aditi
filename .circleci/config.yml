@@ -1,6 +1,7 @@
 version: 2.1
 
 workflows:
+  version: 2
   unit_tests:
     jobs:
       - job1
