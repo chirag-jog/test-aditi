@@ -5,10 +5,13 @@ workflows:
     jobs:
       - job1
       - job2
-      - job3:
+      - hold:
           type: approval
           requires:
             - job2
+      - deploy_to_production:
+          requires:
+            - hold
 
 jobs:
   job1:
@@ -27,7 +30,7 @@ jobs:
           name: 2nd job for prospective merge
           command: echo "2nd job"
 
-  job3:
+  hold:
     docker:
       - image: google/cloud-sdk
     steps:
