@@ -39,6 +39,8 @@ jobs:
       run_integration_tests:
         type: boolean
         default: false
+    when:
+      condition: << parameters.run_integration_tests >>
     docker:
       - image: google/cloud-sdk
     steps:
