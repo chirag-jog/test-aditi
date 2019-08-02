@@ -1,16 +1,20 @@
 version: 2.1
 
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
 workflows:
-  build_and_test:
+  unit_tests:
     jobs:
       - job1
-      - job2
-      #- job3:
-      #    requires:
-      #      - job2
-
-  deploy:
+      
+  integration_tests:
+  - when:
+      condition: << pipeline.parameters.run_integration_tests >>
     jobs:
+      - job2
       - job3
 
 jobs:
