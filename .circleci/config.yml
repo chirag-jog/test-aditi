@@ -16,24 +16,29 @@ parameters:
 
 jobs:
   job1:
-    docker:
-      - image: google/cloud-sdk
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - run:
           name: 1st job for unit tests
           command: echo "1st job"
   job2:
-    docker:
-      - image: google/cloud-sdk
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - run:
           name: 2nd job for prospective merge
           command: echo "2nd job"
   job3:
-    docker:
-      - image: google/cloud-sdk
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
-      - when:
-          condition: <<pipeline.parameters.run_integration_tests>>
-          steps:
-            - run: echo "my custom checkout"
+      - run: 
+          name : 3rd job for integration tests
+          command: |
+            if [[ << pipeline.parameters.run_integration_tests >> == true ]]; then 
+              echo << pipeline.parameters.run_integration_tests >>
+            else
+              echo "Not running integration tests"
+              exit 0
+            fi
