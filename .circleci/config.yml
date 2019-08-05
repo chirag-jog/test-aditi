@@ -34,7 +34,6 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - when:
-          condition:
-            equals: ['<< pipeline.parameters.run_integration_tests >>', true]
+          condition: << pipeline.parameters.run_integration_tests >>
           steps:
             - run: echo << pipeline.parameters.run_integration_tests >>
