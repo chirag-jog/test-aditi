@@ -33,7 +33,11 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      - when:
-          condition: << pipeline.parameters.run_integration_tests >>
-          steps:
-            - run: echo << pipeline.parameters.run_integration_tests >>
+      - run: 
+          name : Integration tests
+          command: |
+            if [[ << pipeline.parameters.run_integration_tests >> == true ]]; then 
+              echo << pipeline.parameters.run_integration_tests >>
+            else
+              exit 0
+            fi
