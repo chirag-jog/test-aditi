@@ -34,10 +34,11 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run: 
-          name : Integration tests
+          name : 3rd job for integration tests
           command: |
             if [[ << pipeline.parameters.run_integration_tests >> == true ]]; then 
               echo << pipeline.parameters.run_integration_tests >>
             else
+              echo "Not running integration tests"
               exit 0
             fi
