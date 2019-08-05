@@ -1,0 +1,40 @@
+version: 2.1
+
+workflows:
+  unit_tests:
+    jobs:
+      - job1
+  integration_tests:
+    jobs:
+      - job2
+      - job3
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+jobs:
+  job1:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: 1st job for unit tests
+          command: echo "1st job"
+  job2:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: 2nd job for prospective merge
+          command: echo "2nd job"
+  job3:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - when:
+          condition:
+            equals: ['<< pipeline.parameters.run_integration_tests >>', true]
+          steps:
+            - run: echo << pipeline.parameters.run_integration_tests >>
