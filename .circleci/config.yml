@@ -45,29 +45,9 @@ jobs:
           name: 1st job for unit tests
           command: |
             echo -e '
-              <!DOCTYPE html>
-              <html>
-              <head>
-                <style type="text/css">
-                  <!--
-                  .tab { margin-left: 40px; }
-                  -->
-                </style>
-                <script>
-                  var buildno = "${CIRCLE_BUILD_NUM}";
-                </script>
-              </head>
-              <body>
-                <h1>
-                  the value for number is:
-                  <script type="text/javascript">
-                    document.write(buildno)
-                  </script>
-                </h1>                                                                                                                     
-              </body>
-              </html>
-            ' > /tmp/artifacts.html
+              htmlcov = "https://console.cloud.google.com/storage/browser/aditi-test/test-${CIRCLE_BUILD_NUM}/?project=velotio-playground&authuser=0&organizationId=33488546694"
+            ' > /tmp/artifacts.txt
 
       - store_artifacts:
-          path: /tmp/artifacts.html
-          destination: artifacts.html
+          path: /tmp/artifacts.txt
+          destination: artifacts.txt
