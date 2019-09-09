@@ -5,6 +5,9 @@ workflows:
     jobs:
       - job1
 
+orbs:
+  gcp-cli: circleci/gcp-cli@1.8.2
+
 commands:
   configure_environment:
     description: "Initial environment setup: Configure Gcloud and installs Docker Compose."
