@@ -4,41 +4,53 @@ workflows:
   unit_tests:
     jobs:
       - job1
-  integration_tests:
-    jobs:
-      - job2
-      - job3
 
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
+commands:
+  configure_environment:
+    description: "Initial environment setup: Configure Gcloud and installs Docker Compose."
+    steps:
+      - run:
+          name: Authorize gcloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project sightmachine-178216
+            gcloud --quiet config set compute/zone us-west1-a
+            gcloud --quiet container clusters get-credentials dev-k8s-uw1
+            ## To authenticate to Container Registry, use gcloud as a Docker credential helper
+            echo y | gcloud auth configure-docker
 
 jobs:
   job1:
     machine:
       image: ubuntu-1604:201903-01
     steps:
+      - configure_environment
+
       - run:
           name: 1st job for unit tests
-          command: echo "1st job"
-  job2:
-    machine:
-      image: ubuntu-1604:201903-01
-    steps:
-      - run:
-          name: 2nd job for prospective merge
-          command: echo "2nd job"
-  job3:
-    machine:
-      image: ubuntu-1604:201903-01
-    steps:
-      - run: 
-          name : 3rd job for integration tests
           command: |
-            if [[ << pipeline.parameters.run_integration_tests >> == true ]]; then 
-              echo << pipeline.parameters.run_integration_tests >>
-            else
-              echo "Not running integration tests"
-              exit 0
-            fi
+            echo -e '
+              <!DOCTYPE html>
+              <html>
+              <head>
+              <style type="text/css">
+              <!--
+              .tab { margin-left: 40px; }
+              -->
+              </style>
+              </head>
+              <script>
+                var buildno = "${CIRCLE_BUILD_NUM}";
+              </script>
+              <body>
+              <p>&#9671; coverage reports</p>
+              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/sm-circleci-artifacts/htmlcov-buildno/htmlcov/?project=sightmachine-178216&authuser=2&organizationId=81543687075">htmlcov/</a>
+              </p>                                                                                                                           
+              </body>
+              </html>
+            ' > /tmp/artifacts.html
+
+      - store_artifacts:
+          path: /tmp/artifacts.html
+          destination: artifacts.html
