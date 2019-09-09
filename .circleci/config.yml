@@ -39,7 +39,7 @@ jobs:
           name: gsutil copy
           command: |
             touch /tmp/test
-            gsutil cp /tmp/test gs://aditi-test/test-${CIRCLE_BUILD_NUM}
+            gsutil cp /tmp/test gs://aditi-test/test-${CIRCLE_BUILD_NUM}/
 
       - run:
           name: 1st job for unit tests
@@ -59,7 +59,7 @@ jobs:
               </script>
               <body>
               <p>&#9671; coverage reports</p>
-              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/aditi-test/test-"+buildno+"?project=velotio-playground&authuser=0&organizationId=33488546694"</a>
+              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/aditi-test/test-{{buildno}}/?project=velotio-playground&authuser=0&organizationId=33488546694"</a>
               </p>                                                                                                                           
               </body>
               </html>
