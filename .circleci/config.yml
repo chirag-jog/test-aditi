@@ -45,7 +45,7 @@ jobs:
               </script>
               <body>
               <p>&#9671; coverage reports</p>
-              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/sm-circleci-artifacts/htmlcov-buildno/htmlcov/?project=sightmachine-178216&authuser=2&organizationId=81543687075">htmlcov/</a>
+              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/sm-circleci-artifacts/htmlcov-{{buildno}}/htmlcov/?project=sightmachine-178216&authuser=2&organizationId=81543687075">htmlcov/</a>
               </p>                                                                                                                           
               </body>
               </html>
