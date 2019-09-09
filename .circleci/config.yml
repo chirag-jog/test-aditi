@@ -14,11 +14,7 @@ commands:
           command: |
             echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            gcloud --quiet config set project sightmachine-178216
-            gcloud --quiet config set compute/zone us-west1-a
-            gcloud --quiet container clusters get-credentials dev-k8s-uw1
-            ## To authenticate to Container Registry, use gcloud as a Docker credential helper
-            echo y | gcloud auth configure-docker
+            gcloud --quiet config set project velotio-playground
 
 jobs:
   job1:
@@ -26,6 +22,12 @@ jobs:
       image: ubuntu-1604:201903-01
     steps:
       - configure_environment
+
+      - run:
+          name: gsutil copy
+          command: |
+            touch /tmp/test
+            gsutil cp /tmp/test gs://aditi-test/test-${CIRCLE_BUILD_NUM}/
 
       - run:
           name: 1st job for unit tests
