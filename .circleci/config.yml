@@ -27,6 +27,7 @@ jobs:
       - run:
           name: Install command-line tools  # TODO: Custom image?
           command: |
+            sudo rm -f /etc/boto.cfg
             sudo apt-get -y update
             sudo apt-get install -y gnupg2
 
