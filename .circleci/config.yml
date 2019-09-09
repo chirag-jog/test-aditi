@@ -24,10 +24,11 @@ jobs:
     machine:
       image: ubuntu-1604:201903-01
     steps:
-      - name: Install command-line tools  # TODO: Custom image?
-        command: |
-          sudo apt-get -y update
-          sudo apt-get install -y gnupg2
+      - run:
+          name: Install command-line tools  # TODO: Custom image?
+          command: |
+            sudo apt-get -y update
+            sudo apt-get install -y gnupg2
 
       - gcp-cli/install
 
