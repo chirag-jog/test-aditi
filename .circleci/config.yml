@@ -59,7 +59,7 @@ jobs:
               </script>
               <body>
               <p>&#9671; coverage reports</p>
-              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/aditi-test/test-<%=buildno%>/?project=velotio-playground&authuser=0&organizationId=33488546694">htmlcov/</a>
+              <p class="tab"> <a href="https://console.cloud.google.com/storage/browser/aditi-test/test-{buildno}/?project=velotio-playground&authuser=0&organizationId=33488546694">htmlcov/</a>
               </p>                                                                                                                           
               </body>
               </html>
